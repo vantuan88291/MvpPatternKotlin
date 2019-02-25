@@ -22,18 +22,19 @@ object ServiceGenerator {
 
     // service have not token
     fun <S> createService(serviceClass: Class<S>): S {
-        httpClient.readTimeout(3, TimeUnit.MINUTES)
-        httpClient.connectTimeout(3, TimeUnit.MINUTES)
-        httpClient.addInterceptor { chain ->
-            val original = chain.request()
-            // Request customization: add request headers
-            val requestBuilder = original.newBuilder()
-                .addHeader("Content-Type", "application/json; charset=utf-8")
-                .addHeader("Accept", "application/json")
-                .method(original.method(), original.body())
-            val request = requestBuilder.build()
-            chain.proceed(request)
+        httpClient.apply {
+            readTimeout(3, TimeUnit.MINUTES)
+            connectTimeout(3, TimeUnit.MINUTES)
+            addInterceptor { chain ->
+                val requestBuilder = chain.request().newBuilder()
+                    .addHeader("Content-Type", "application/json; charset=utf-8")
+                    .addHeader("Accept", "application/json")
+                    .method(chain.request().method(), chain.request().body())
+                val request = requestBuilder.build()
+                chain.proceed(request)
+            }
         }
+
         val gson = GsonBuilder()
             .setLenient()
             .create()
@@ -43,15 +44,16 @@ object ServiceGenerator {
     }
 
     fun <S> createServiceToken(serviceClass: Class<S>): S {
-        httpClient.readTimeout(3, TimeUnit.MINUTES)
-        httpClient.connectTimeout(3, TimeUnit.MINUTES)
-        httpClient.addInterceptor { chain ->
-            val original = chain.request()
-            val requestBuilder = original.newBuilder()
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Accept", "application/json")
-                .method(original.method(), original.body()).build()
-            chain.proceed(requestBuilder)
+        httpClient.apply {
+            readTimeout(3, TimeUnit.MINUTES)
+            connectTimeout(3, TimeUnit.MINUTES)
+            addInterceptor { chain ->
+                val requestBuilder = chain.request().newBuilder()
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Accept", "application/json")
+                    .method(chain.request().method(), chain.request().body()).build()
+                chain.proceed(requestBuilder)
+            }
         }
         val client = httpClient.build()
         val retrofit = builder.client(client).build()
