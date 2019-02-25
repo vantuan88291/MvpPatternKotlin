@@ -14,7 +14,7 @@ import com.tuan88291.mvppatternkotlin.utils.Common.DOMAIN
 
 
 object ServiceGenerator {
-    private var httpClient: OkHttpClient.Builder? = null
+    private val httpClient: OkHttpClient.Builder by lazy { OkHttpClient.Builder() }
     private val builder = Retrofit.Builder()
         .baseUrl(DOMAIN)
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -22,10 +22,9 @@ object ServiceGenerator {
 
     // service have not token
     fun <S> createService(serviceClass: Class<S>): S {
-        httpClient = OkHttpClient.Builder()
-        httpClient!!.readTimeout(3, TimeUnit.MINUTES)
-        httpClient!!.connectTimeout(3, TimeUnit.MINUTES)
-        httpClient!!.addInterceptor { chain ->
+        httpClient.readTimeout(3, TimeUnit.MINUTES)
+        httpClient.connectTimeout(3, TimeUnit.MINUTES)
+        httpClient.addInterceptor { chain ->
             val original = chain.request()
             // Request customization: add request headers
             val requestBuilder = original.newBuilder()
@@ -38,16 +37,15 @@ object ServiceGenerator {
         val gson = GsonBuilder()
             .setLenient()
             .create()
-        val client = httpClient!!.build()
+        val client = httpClient.build()
         val retrofit = builder.client(client).addConverterFactory(GsonConverterFactory.create(gson)).build()
         return retrofit.create(serviceClass)
     }
 
     fun <S> createServiceToken(serviceClass: Class<S>): S {
-        httpClient = OkHttpClient.Builder()
-        httpClient!!.readTimeout(3, TimeUnit.MINUTES)
-        httpClient!!.connectTimeout(3, TimeUnit.MINUTES)
-        httpClient!!.addInterceptor { chain ->
+        httpClient.readTimeout(3, TimeUnit.MINUTES)
+        httpClient.connectTimeout(3, TimeUnit.MINUTES)
+        httpClient.addInterceptor { chain ->
             val original = chain.request()
             val requestBuilder = original.newBuilder()
                 .addHeader("Content-Type", "application/json")
@@ -55,7 +53,7 @@ object ServiceGenerator {
                 .method(original.method(), original.body()).build()
             chain.proceed(requestBuilder)
         }
-        val client = httpClient!!.build()
+        val client = httpClient.build()
         val retrofit = builder.client(client).build()
         return retrofit.create(serviceClass)
     }

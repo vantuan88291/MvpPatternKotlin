@@ -3,7 +3,7 @@ package com.tuan88291.mvppatternkotlin.data.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class CommonData<T> {
+class CommonData<T: Any> {
     @SerializedName("data")
     @Expose
     var data: T? = null

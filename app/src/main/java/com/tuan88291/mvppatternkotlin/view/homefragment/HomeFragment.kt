@@ -11,17 +11,19 @@ import androidx.lifecycle.ViewModelProviders
 import com.blankj.utilcode.util.LogUtils
 import com.tuan88291.mvppatternkotlin.BaseFragment
 import com.tuan88291.mvppatternkotlin.R
+import com.tuan88291.mvppatternkotlin.data.DataMain
 import com.tuan88291.mvppatternkotlin.data.entity.DataRoom
 import com.tuan88291.mvppatternkotlin.data.room.livedata.MyViewModel
 import com.tuan88291.mvppatternkotlin.databinding.HomeFragmentBinding
+import com.tuan88291.mvppatternkotlin.utils.SharedPrefs
 
 class HomeFragment : BaseFragment(), HomeContract {
-    private var db: MyViewModel? = null
+    private val db: MyViewModel by lazy{ ViewModelProviders.of(this).get(MyViewModel::class.java) }
     private var binding: HomeFragmentBinding? = null
+    private val presenter: HomePresenter by lazy { HomePresenter(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        db = ViewModelProviders.of(this).get(MyViewModel::class.java)
     }
 
     override fun setView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -30,11 +32,10 @@ class HomeFragment : BaseFragment(), HomeContract {
     }
 
     override fun viewCreated(view: View, savedInstanceState: Bundle?) {
+        lifecycle.addObserver(presenter)
+        binding!!.button.setOnClickListener({ view1 -> db.insert(DataRoom("test", 1)) })
 
-        lifecycle.addObserver(HomePresenter.instance.setCallBack(this))
-        binding!!.button.setOnClickListener({ view1 -> db!!.insert(DataRoom("test", 1)) })
-
-        db!!.allData.observe(this, Observer<List<DataRoom>> { this.onDataChange(it) })
+        db.allData.observe(this, Observer<List<DataRoom>> { this.onDataChange(it) })
 
     }
 
@@ -48,19 +49,22 @@ class HomeFragment : BaseFragment(), HomeContract {
 
     override fun onError(mess: String) {
 
-        Toast.makeText(mContext(), mess, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(App.applicationContext(), "" + SharedPrefs.instance?.get("keyObj", DataMain::class.java), Toast.LENGTH_SHORT).show()
+
     }
 
 
     override fun onDataChange(data: List<DataRoom>) {
         LogUtils.a(data.size)
-        binding!!.button.setText(data.size.toString() + "")
+        binding?.button?.setText(data.size.toString() + "")
         mContext()!!.setItem(data.size.toString() + "")
+//        val item = DataMain("test2", 1)
+//        SharedPrefs.instance?.put("keyObj", item)
 
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        lifecycle.removeObserver(HomePresenter.instance.setCallBack(this))
+        lifecycle.removeObserver(presenter)
     }
 }

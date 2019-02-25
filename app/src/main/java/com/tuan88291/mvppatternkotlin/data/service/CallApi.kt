@@ -7,11 +7,11 @@ import retrofit2.Call
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
-
+@JvmSuppressWildcards
 interface CallApi {
-    @get:GET("api")
-    val list: Call<CommonData<*>>
-    @get:FormUrlEncoded
-    @get:POST("api")
-    val listMore: Call<CommonData<Data>>
+    @GET("api")
+    fun getList(): Call<CommonData<Data>>
+    @FormUrlEncoded
+    @POST("api")
+    fun listMore(): Call<CommonData<Data>>
 }

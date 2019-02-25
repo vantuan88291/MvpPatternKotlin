@@ -9,8 +9,8 @@ import com.tuan88291.mvppatternkotlin.data.entity.DataRoom
 @Dao
 interface QueriesDao {
 
-    @get:Query("select * from user")
-    val all: LiveData<List<DataRoom>>
+    @Query("select * from user")
+    fun getAll(): LiveData<List<DataRoom>>
 
     @Insert
     fun insertData(item: DataRoom)

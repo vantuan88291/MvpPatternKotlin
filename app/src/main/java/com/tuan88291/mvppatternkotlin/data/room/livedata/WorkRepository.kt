@@ -1,6 +1,7 @@
 package com.tuan88291.mvppatternkotlin.data.room.livedata
 
 import android.app.Application
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.tuan88291.mvppatternkotlin.data.entity.DataRoom
 import com.tuan88291.mvppatternkotlin.data.room.AppDatabase
@@ -14,9 +15,8 @@ class WorkRepository internal constructor(application: Application) {
     init {
         val db = AppDatabase.getAppDatabase(application)
         mQueries = db.queries()
-        allData = mQueries.all
+        allData = mQueries.getAll()
     }
-
 
     fun insert(data: DataRoom) {
         object : AsyncTaskEasy() {
@@ -24,6 +24,7 @@ class WorkRepository internal constructor(application: Application) {
                 mQueries.insertData(data)
                 return null
             }
+
         }
     }
 }
