@@ -6,7 +6,8 @@ import androidx.lifecycle.LiveData
 import com.tuan88291.mvppatternkotlin.data.entity.DataRoom
 import com.tuan88291.mvppatternkotlin.data.room.AppDatabase
 import com.tuan88291.mvppatternkotlin.data.room.QueriesDao
-import easy.asyntask.tuan88291.library.AsyncTaskEasy
+import com.tuan88291.mvppatternkotlin.utils.observe.AutoDisposable
+import com.tuan88291.mvppatternkotlin.utils.observe.ObserveEasy
 
 class WorkRepository internal constructor(application: Application) {
     private val mQueries: QueriesDao
@@ -19,12 +20,14 @@ class WorkRepository internal constructor(application: Application) {
     }
 
     fun insert(data: DataRoom) {
-        object : AsyncTaskEasy() {
+        object : ObserveEasy(){
             override fun doBackground(): Any? {
                 mQueries.insertData(data)
+                return false
+            }
+            override fun getDispose(): AutoDisposable? {
                 return null
             }
-
         }
     }
 }
