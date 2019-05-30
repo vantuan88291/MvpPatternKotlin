@@ -1,9 +1,9 @@
-package com.tuan88291.mvppatternkotlin.data.room.livedata
+package com.tuan88291.mvppatternkotlin.data.local.room.livedata
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.tuan88291.mvppatternkotlin.data.entity.DataRoom
+import com.tuan88291.mvppatternkotlin.data.local.entity.DataRoom
 
 class MyViewModel(application: Application) : AndroidViewModel(application) {
     private val mRepository: WorkRepository

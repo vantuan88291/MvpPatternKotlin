@@ -1,4 +1,4 @@
-package com.tuan88291.mvppatternkotlin.data.service.customcallback
+package com.tuan88291.mvppatternkotlin.data.remote.customcallback
 
 import com.blankj.utilcode.util.LogUtils
 import com.google.gson.Gson

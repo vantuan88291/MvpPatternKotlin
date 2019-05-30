@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import com.tuan88291.mvppatternkotlin.view.MainActivity
+import com.tuan88291.mvppatternkotlin.view.activity.MainActivity
 
 abstract class BaseFragment : Fragment(), BaseView {
     private var context: MainActivity? = null
@@ -35,7 +35,7 @@ abstract class BaseFragment : Fragment(), BaseView {
 
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         this.context = context as MainActivity?
     }

@@ -1,10 +1,8 @@
-package com.tuan88291.mvppatternkotlin.data.service
+package com.tuan88291.mvppatternkotlin.data.remote
 
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

@@ -1,4 +1,4 @@
-package com.tuan88291.mvppatternkotlin.view
+package com.tuan88291.mvppatternkotlin.view.activity
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -11,10 +11,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.tuan88291.mvppatternkotlin.BaseActivity
 import com.tuan88291.mvppatternkotlin.R
-import com.tuan88291.mvppatternkotlin.data.model.Data
+import com.tuan88291.mvppatternkotlin.data.local.model.Data
 import com.tuan88291.mvppatternkotlin.databinding.ActivityMainBinding
-import com.tuan88291.mvppatternkotlin.view.about.About
-import com.tuan88291.mvppatternkotlin.view.homefragment.HomeFragment
+import com.tuan88291.mvppatternkotlin.view.fragment.about.About
+import com.tuan88291.mvppatternkotlin.view.fragment.homefragment.HomeFragment
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 

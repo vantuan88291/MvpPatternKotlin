@@ -1,4 +1,4 @@
-package com.tuan88291.mvppatternkotlin.data.service
+package com.tuan88291.mvppatternkotlin.data.remote
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.Retrofit

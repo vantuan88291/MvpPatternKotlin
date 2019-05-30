@@ -1,14 +1,14 @@
-package com.tuan88291.mvppatternkotlin.view.homefragment
+package com.tuan88291.mvppatternkotlin.view.fragment.homefragment
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
-import com.tuan88291.mvppatternkotlin.data.model.CommonData
-import com.tuan88291.mvppatternkotlin.data.model.Data
-import com.tuan88291.mvppatternkotlin.data.service.ApiUtil
-import com.tuan88291.mvppatternkotlin.data.service.BaseInteractor
-import com.tuan88291.mvppatternkotlin.data.service.CallApi
-import com.tuan88291.mvppatternkotlin.data.service.customcallback.BaseRetrofit
+import com.tuan88291.mvppatternkotlin.data.local.model.CommonData
+import com.tuan88291.mvppatternkotlin.data.local.model.Data
+import com.tuan88291.mvppatternkotlin.data.remote.ApiUtil
+import com.tuan88291.mvppatternkotlin.data.remote.BaseInteractor
+import com.tuan88291.mvppatternkotlin.data.remote.CallApi
+import com.tuan88291.mvppatternkotlin.data.remote.customcallback.BaseRetrofit
 import retrofit2.Response
 
 class HomePresenter(val v: HomeContract) : BaseInteractor(), LifecycleObserver, HomeContract.HomePresenterView {

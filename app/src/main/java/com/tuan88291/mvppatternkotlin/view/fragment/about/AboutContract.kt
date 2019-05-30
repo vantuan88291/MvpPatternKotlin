@@ -1,4 +1,4 @@
-package com.tuan88291.mvppatternkotlin.view.about
+package com.tuan88291.mvppatternkotlin.view.fragment.about
 
 interface AboutContract {
     fun inCreate()

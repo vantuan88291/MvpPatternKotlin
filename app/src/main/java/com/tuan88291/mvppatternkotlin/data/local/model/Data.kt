@@ -1,4 +1,4 @@
-package com.tuan88291.mvppatternkotlin.data.model
+package com.tuan88291.mvppatternkotlin.data.local.model
 
 import androidx.lifecycle.ViewModel
 

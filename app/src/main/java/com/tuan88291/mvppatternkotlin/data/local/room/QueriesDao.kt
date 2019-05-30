@@ -1,10 +1,10 @@
-package com.tuan88291.mvppatternkotlin.data.room
+package com.tuan88291.mvppatternkotlin.data.local.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.tuan88291.mvppatternkotlin.data.entity.DataRoom
+import com.tuan88291.mvppatternkotlin.data.local.entity.DataRoom
 
 @Dao
 interface QueriesDao {

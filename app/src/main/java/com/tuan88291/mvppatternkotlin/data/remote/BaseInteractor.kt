@@ -1,4 +1,4 @@
-package com.tuan88291.mvppatternkotlin.data.service
+package com.tuan88291.mvppatternkotlin.data.remote
 
 abstract class BaseInteractor {
 

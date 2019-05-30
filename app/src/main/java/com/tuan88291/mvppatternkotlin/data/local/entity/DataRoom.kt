@@ -1,4 +1,4 @@
-package com.tuan88291.mvppatternkotlin.data.entity
+package com.tuan88291.mvppatternkotlin.data.local.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

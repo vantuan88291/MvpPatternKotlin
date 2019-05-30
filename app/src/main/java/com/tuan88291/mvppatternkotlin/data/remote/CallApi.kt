@@ -1,8 +1,8 @@
-package com.tuan88291.mvppatternkotlin.data.service
+package com.tuan88291.mvppatternkotlin.data.remote
 
 
-import com.tuan88291.mvppatternkotlin.data.model.CommonData
-import com.tuan88291.mvppatternkotlin.data.model.Data
+import com.tuan88291.mvppatternkotlin.data.local.model.CommonData
+import com.tuan88291.mvppatternkotlin.data.local.model.Data
 import retrofit2.Call
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET

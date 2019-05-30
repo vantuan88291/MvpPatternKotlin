@@ -1,4 +1,4 @@
-package com.tuan88291.mvppatternkotlin.view.about
+package com.tuan88291.mvppatternkotlin.view.fragment.about
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,18 @@ import com.blankj.utilcode.util.LogUtils
 import com.tuan88291.mvppatternkotlin.BaseFragment
 import com.tuan88291.mvppatternkotlin.R
 import com.tuan88291.mvppatternkotlin.databinding.AboutFragmentBinding
+import com.tuan88291.mvppatternkotlin.utils.observe.AutoDisposable
+import com.tuan88291.mvppatternkotlin.utils.observe.ObserveEasy
 
 class About : BaseFragment(), AboutContract {
     private var binding: AboutFragmentBinding? = null
+    private val autodis = AutoDisposable()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        autodis.bindTo(this.lifecycle)
+
+    }
     override fun setView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.about_fragment, container, false)
         return binding!!.getRoot()
@@ -22,6 +31,33 @@ class About : BaseFragment(), AboutContract {
         lifecycle.addObserver(AboutPresenter.instance.setCallback(this))
         binding!!.title.setText(mContext()!!.getItem())
 
+        object : ObserveEasy(){
+            override fun getDispose(): AutoDisposable? {
+                return autodis
+            }
+
+            override fun doBackground(): Any? {
+
+                return null
+            }
+
+            override fun onFail(err: String) {
+                super.onFail(err)
+            }
+
+            override fun onLoadComplete() {
+                super.onLoadComplete()
+            }
+
+            override fun onLoading() {
+                super.onLoading()
+            }
+
+            override fun onSuccess(result: Any?) {
+                super.onSuccess(result)
+            }
+
+        }
     }
 
     override fun inCreate() {
